@@ -74,3 +74,10 @@ end
 def knife_rb
   File.join(sandbox_root, "knife.rb")
 end
+
+begin
+  require 'kitchen/rake_tasks'
+  Kitchen::RakeTasks.new
+rescue LoadError
+  puts ">>>>> Kitchen gem not loaded, omitting tasks" unless ENV['CI']
+end
